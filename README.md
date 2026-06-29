@@ -58,24 +58,3 @@ A model that simply predicts "no" for every customer (without looking at any fea
 All four models score around 89–90% accuracy, barely above the 88.7% baseline. But looking under the hood, the initial model (using only demographics) predicted "no" for **every single customer**. Accuracy looked fine on paper while the model was completely useless for the bank's goal.
 
 Switching to AUC and expanding the feature set (adding campaign contact information) provided a meaningful improvement in the model's ability to identify likely subscribers.
-
-### What Drives Subscription?
-
-Based on model behavior and feature engineering:
-
-- **Contact timing matters:** Certain months (especially end-of-quarter: March, June, September, December) see higher subscription rates.
-- **Previous campaign history helps:** Clients who were successfully converted in a prior campaign (`poutcome = success`) are far more likely to subscribe again.
-- **Being contacted before is a positive signal:** Clients with `contacted_before = 1` tend to convert at higher rates.
-- **Demographics alone are not enough:** Job, age, and marital status have weak predictive power on their own. Campaign behavior is more telling.
-
----
-
-## Actionable Recommendations
-
-1. **Prioritize clients with a successful prior campaign outcome.** If a client said "yes" before, they are your highest-probability target. Focus call resources here first.
-
-2. **Schedule campaigns in March, June, September, and December.** Subscription rates are noticeably higher at the end of each quarter. Aligning campaigns to these months can improve conversion without adding calls.
-
-3. **Deprioritize clients who have never been contacted.** First-time contacts convert at a much lower rate. Use limited call capacity on warm leads first.
-
-4. **Use the Logistic Regression model to score and rank your contact list.** Before each campaign, run client records through the model to get a probability score for each client. Call the top-ranked clients first and set a cut-off threshold based on how many calls the team can handle.
